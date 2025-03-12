@@ -1,0 +1,160 @@
+/* Estilos generales */
+body {
+    font-family: 'Lora', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Encabezado */
+header {
+    background-color: #ffffff;
+    color: #1f3c58;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+/* Barra de navegación */
+nav {
+    background-color: #f2f2f2;
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #1f3c58;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #1f3c58;
+    color: #ffffff;
+}
+
+/* Secciones de contenido */
+section {
+    background-color: #ffffff;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #1f3c58;
+}
+
+/* Titulos y textos */
+h2 {
+    color: #1f3c58;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* Estilos para bloques de código */
+pre {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+
+code {
+    font-family: 'Courier New', monospace;
+    font-size: 1em;
+    color: #1f3c58;
+}
+
+/* Estilos para código en línea */
+p code {
+    background-color: #eaeaea;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+/* Botones */
+button {
+    background-color: #1f3c58;
+    border: none;
+    color: #ffffff;
+    padding: 10px 15px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background-color: #2b4d6e;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #f2f2f2;
+    color: #333;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    section {
+        width: 90%;
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+}

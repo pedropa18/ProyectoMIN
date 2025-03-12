@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limpieza de Datos</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Limpieza de Datos</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="extraccion.html">Extracción de Datos</a></li>
+                <li><a href="limpieza.html">Limpieza de Datos</a></li>
+                <li><a href="visualizacion.html">Visualización de Datos</a></li>
+                <li><a href="modelos.html">Modelos de Predicción</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="limpieza">
+        <h2>Limpieza de Datos</h2>
+        <p>
+            Para mejorar la calidad de los datos extraídos se ha realizado un proceso de limpieza que incluye la eliminación de valores nulos, 
+            filtrado de eventos cancelados y estandarización de formatos. Este paso es crucial para garantizar la precisión del análisis.
+        </p>
+    </section>
+
+    <section id="metodos_limpieza">
+        <section id="filtrado-datos">
+            <h2>Paso 1: Filtrado de los datos</h2>
+            <p>
+                Inicialmente, las colecciones contienen todos los eventos de todas las temporadas y sedes. Sin embargo, se desea 
+                centrar el análisis en los eventos realizados en la sede de Madrid durante la temporada 23/24. Por ello, se filtra 
+                por rango de fechas y se seleccionan aquellos cuyo <code>idSede</code> es igual a 1.
+            </p>
+            <pre><code>from datetime import datetime  # Importamos el módulo datetime
+
+# Definir el rango de fechas
+fecha_inicio = datetime(2023, 9, 1)
+fecha_fin = datetime(2024, 7, 31, 23, 59, 59)
+
+# Definir la consulta (query) con el filtro de fechas y sede
+query = {
+    "fecha": {"$gte": fecha_inicio, "$lte": fecha_fin},
+    "idSede": "1"  # Filtrar por sede de Madrid (idSede = 1)
+}
+
+# Definir la proyección para seleccionar solo los campos de interés
+projection = {
+    "_id": 0,
+    "idacto": 1,
+    "VisitantesTotales": 1,
+    "cancelado": 1,
+    "nombre": 1,
+    "tipo": 1,
+}
+
+projection2 = {
+    "_id": 0,
+    "idActo": 1,
+    "Total_Validadas": 1,
+    "fecha": 1,
+    "formato": 1,
+    "nombre": 1,
+}
+
+# Obtener los datos de las colecciones filtradas
+resultados = list(mycol1.find(query, projection))
+resultados2 = list(mycol2.find(query, projection2))</code></pre>
+        </section>
+    
+        <section id="creacion-dataframes">
+            <h2>Paso 2: Creación de DataFrames</h2>
+            <p>
+                Con los datos filtrados se crea un DataFrame para cada colección utilizando <code>pandas</code> y, posteriormente, se 
+                combinan en uno solo mediante una unión por el campo <code>idacto</code>.
+            </p>
+            <pre><code>import pandas as pd  # Importamos pandas
+
+# Crear DataFrames a partir de los resultados filtrados
+df1 = pd.DataFrame(resultados)
+df2 = pd.DataFrame(resultados2)
+
+# Renombrar la columna "idActo" en df2 para que coincida con df1
+df2 = df2.rename(columns={"idActo": "idacto"})
+
+# Realizar la unión de los DataFrames por "idacto"
+df_combinado = pd.merge(df1, df2, on="idacto", how="inner")
+
+# Ordenar el DataFrame por fecha en orden ascendente
+df_combinado = df_combinado.sort_values(by="fecha", ascending=True)</code></pre>
+        </section>
+    
+        <section id="limpieza-datos">
+            <h2>Paso 3: Limpieza de los datos</h2>
+            <p>
+                Para garantizar un análisis preciso se eliminan aquellos eventos que puedan distorsionar los resultados, 
+                tales como actos privados, visitas escolares sin validación de entradas o eventos cancelados. Además, se 
+                eliminan registros con valores nulos en campos clave.
+            </p>
+            <pre><code># Eliminar actos sin validación de entradas (actos privados, visitas escolares, etc.)
+df_combinado = df_combinado.dropna(subset=["Total_Validadas"])
+df_combinado = df_combinado[df_combinado['Total_Validadas'] != 0]
+
+# Eliminar eventos cancelados
+df_combinado = df_combinado[df_combinado['cancelado'] != 1]
+
+# Eliminar registros con nombres nulos o vacíos
+df_combinado = df_combinado.dropna(subset=['nombre_x'])
+df_combinado = df_combinado.dropna(subset=['nombre_y'])
+df_combinado = df_combinado[df_combinado['nombre_x'].str.strip() != "NA"]
+df_combinado = df_combinado[df_combinado['nombre_y'].str.strip() != "NA"]</code></pre>
+            <p>
+                Con estos pasos se obtiene un DataFrame limpio y estructurado, listo para un análisis más exhaustivo.
+            </p>
+        </section>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 Proyecto de Análisis de Datos. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

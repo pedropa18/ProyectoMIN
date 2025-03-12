@@ -1,0 +1,96 @@
+EXTRACCIÓN DE LOS datos
+
+Paso 1: Configuración del entorno:
+!pip install pymongo
+import pymongo
+print(pymongo.__version__)
+
+Paso 2: Conexión a la base de datos
+username = "pedro"
+password = "********"
+mongo_uri = f"mongodb://{username}:{password}@srvmongo.fmarch.es:27017"
+myclient = pymongo.MongoClient(mongo_uri)
+
+Paso 3: Selección de las bases de datos
+mydb1 = myclient["culturales"]
+mydb2 = myclient["reservas"]
+
+Paso 4: Selección de las colecciones de cada una de las bases de datos
+mycol1 = mydb1["actos"]
+mycol2 = mydb2["resumenv2"]
+
+De esta forma ya tenemos las colecciones de los datos sobre los que queremos trabajar
+----------------------------------------------------------------------------------------------
+LIMPIEZA DE DATOS
+
+Paso 1: para empezar las colecciones nos devuelven todos los eventos en su totalidad de todas las temporadas y todas las sedes, sin embargo, nosotros
+nos queremos centrar tan solo en los que se han realizado en la sede de Madrid y los de la temporada 23/24. Para ello hago un filtrado de los datos por 
+rangos de fecha para ambas colecciones y la selección de aquellos los cuales su campo idSede es igual a 1.
+
+from datetime import datetime # Importamos el módulo datetime
+
+# Generamos en ese formato el rango de fechas
+fecha_inicio = datetime(2023, 9, 1)
+fecha_fin = datetime(2024, 7, 31, 23, 59, 59)
+
+# Creamos la query como intervalo de fechas para extraer los datos en ese rango
+query = {
+    "fecha": {"$gte" : fecha_inicio, "$lte" : fecha_fin},
+    "idSede": "1"  # Filtrar por idSede = 1 (Madrid)
+}
+# Proyección para mostrar solamente los campos que me interesan
+projection = {
+    "_id" : 0,
+    "idacto": 1,
+    "VisitantesTotales": 1,
+    "cancelado": 1,
+    "nombre": 1,
+    "tipo": 1,
+}
+
+projection2 = {
+    "_id" : 0,
+    "idActo": 1,
+    "Total_Validadas": 1,
+    "fecha": 1,
+    "formato": 1,
+    "nombre": 1,
+}
+
+resultados = list(mycol1.find(query, projection))
+resultados2 = list(mycol2.find(query, projection2))
+
+Paso 2: Una vez realizado el filtrado por fecha haciendo uso de pandas creo los dataframes correspondientes a cada una de las listas
+y genero uno combinado el cual es el resultado de la union por idacto de estos dataframes.
+
+df1 = pd.DataFrame(resultados)
+df2 = pd.DataFrame(resultados2)
+
+# Renombrar columnas si es necesario
+df2 = df2.rename(columns={"idActo": "idacto"})
+
+
+df_combinado = pd.merge(df1, df2, on="idacto", how="inner")
+
+df_combinado = df_combinado.sort_values(by="fecha", ascending=True)  # Orden ascendente
+
+Paso 3: Teniendo ya la selección de los datos sobre los que queremos trabajar, nos limpiamos aquellos datos los cuales nos pueden estropear
+el analisis debido a que puede haber actos privados o de visitas escolares los cuales no se realiza validación o tambien aquellos los cuales
+el valor de su campo se nulo. Para ello lo realizamos de la siguiente forma:
+
+# Limpiamos las filas de los actos en los cuales no se validan entradas ya sea porque son actos privados o visitas extraescolares de colegios, etc...
+df_combinado = df_combinado.dropna(subset=["Total_Validadas"])
+df_combinado = df_combinado[df_combinado['Total_Validadas'] != 0]
+
+# Eliminar los actos cancelados
+df_combinado = df_combinado[df_combinado['cancelado'] != 1]
+
+# Eliminar filas donde nombre sea un valor nulo
+df_combinado = df_combinado.dropna(subset=['nombre_x'])
+df_combinado = df_combinado.dropna(subset=['nombre_y'])
+df_combinado = df_combinado[df_combinado['nombre_x'].str.strip() != "NA"]
+df_combinado = df_combinado[df_combinado['nombre_y'].str.strip() != "NA"]
+
+Y asi de esta forma obtenemos un dataframe compacto y limpio para poder hacer un análisis mas exahustivo y real de los datos.
+
+----------------------------------------------------------------------------------------------

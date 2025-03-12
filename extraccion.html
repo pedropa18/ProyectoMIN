@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extracción de Datos</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Extracción de Datos</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="extraccion.html">Extracción de Datos</a></li>
+                <li><a href="limpieza.html">Limpieza de Datos</a></li>
+                <li><a href="visualizacion.html">Visualización de Datos</a></li>
+                <li><a href="modelos.html">Modelos de Predicción</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="extraccion">
+        <h2>Extracción de Datos</h2>
+        <p>
+            En esta sección se describe el proceso de extracción de datos desde la base de datos en MongoDB.
+            Se han utilizado herramientas como <code>pymongo</code> para conectar con la base de datos y
+            realizar consultas específicas que permiten obtener la información relevante para el análisis.
+        </p>
+    </section>
+
+    <section id="metodos">
+        <section id="configuracion-entorno">
+            <h2>Paso 1: Configuración del entorno</h2>
+            <p>
+                Para trabajar con MongoDB en Python es necesario instalar y configurar la biblioteca
+                <code>pymongo</code>.
+            </p>
+            <pre><code>!pip install pymongo
+import pymongo
+print(pymongo.__version__)</code></pre>
+        </section>
+
+        <section id="conexion-base-datos">
+            <h2>Paso 2: Conexión a la base de datos</h2>
+            <p>
+                Se utiliza la URI del servidor y las credenciales de acceso para conectarse a la base de datos de
+                MongoDB.
+            </p>
+            <pre><code>username = "pedro"
+password = "********"
+mongo_uri = f"mongodb://{username}:{password}@srvmongo.fmarch.es:27017"
+myclient = pymongo.MongoClient(mongo_uri)</code></pre>
+        </section>
+
+        <section id="seleccion-bases">
+            <h2>Paso 3: Selección de las bases de datos</h2>
+            <p>Se seleccionan las bases de datos sobre las que se va a trabajar:</p>
+            <pre><code>mydb1 = myclient["culturales"]
+mydb2 = myclient["reservas"]</code></pre>
+        </section>
+
+        <section id="seleccion-colecciones">
+            <h2>Paso 4: Selección de las colecciones</h2>
+            <p>
+                Cada base de datos contiene una o varias colecciones. Aquí se seleccionan las colecciones específicas:
+            </p>
+            <pre><code>mycol1 = mydb1["actos"]
+mycol2 = mydb2["resumenv2"]</code></pre>
+            <p>
+                De esta forma, ya se tiene acceso a los datos sobre los que se desea trabajar.
+            </p>
+        </section>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Proyecto de Análisis de Datos. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
