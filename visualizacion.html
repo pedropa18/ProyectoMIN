@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,16 +20,17 @@
         function mostrarImagen(imgElement) {
             let modal = document.getElementById("imagen-modal");
             let modalImg = document.getElementById("imagen-modal-content");
-            
+
             modal.style.display = "flex";
             modalImg.src = imgElement.src;
         }
-    
+
         function cerrarImagen() {
             document.getElementById("imagen-modal").style.display = "none";
         }
     </script>
 </head>
+
 <body>
     <header>
         <h1>Visualización de Datos</h1>
@@ -46,15 +48,16 @@
     <section id="visualizacion">
         <h2>Visualización de Datos</h2>
         <p>
-            En esta sección se presentan diferentes gráficos y representaciones visuales que permiten 
-            analizar la distribución de los datos, identificar tendencias y patrones clave para la 
+            En esta sección se presentan diferentes gráficos y representaciones visuales que permiten
+            analizar la distribución de los datos, identificar tendencias y patrones clave para la
             toma de decisiones.
         </p>
-        
+
         <!-- Gráfico 1 -->
         <section>
             <h3>Gráfico de Distribución</h3>
-            <img src="img/grafico1.png" alt="Gráfico de distribución" style="width: 100%; max-width: 600px;" onclick="mostrarImagen(this)">
+            <img src="img/grafico1.png" alt="Gráfico de distribución" style="width: 100%; max-width: 600px;"
+                onclick="mostrarImagen(this)">
             <button onclick="mostrarCodigo('codigo1')">Ver Código</button>
             <pre id="codigo1" style="display: none;">
                 # Contar la cantidad de cada tipo de acto
@@ -76,7 +79,8 @@
         <!-- Gráfico 2 -->
         <section>
             <h3>Gráfico de Actos por tipo</h3>
-            <img src="img/grafico2.png" alt="Gráfico de barras" style="width: 100%; max-width: 600px;" onclick="mostrarImagen(this)">
+            <img src="img/grafico2.png" alt="Gráfico de barras" style="width: 100%; max-width: 600px;"
+                onclick="mostrarImagen(this)">
             <button onclick="mostrarCodigo('codigo2')">Ver Código</button>
             <pre id="codigo2" style="display: none;">
                 # Contar la cantidad de cada formato
@@ -111,7 +115,8 @@
         <!-- Gráfico 3 -->
         <section>
             <h3>Gráfico de actos por formato</h3>
-            <img src="img/grafico3.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;" onclick="mostrarImagen(this)">
+            <img src="img/grafico3.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
+                onclick="mostrarImagen(this)">
             <button onclick="mostrarCodigo('codigo3')">Ver Código</button>
             <pre id="codigo3" style="display: none;">
                 tipo_acto_counts = df_combinado['tipo'].value_counts()
@@ -126,7 +131,8 @@
         </section>
         <section>
             <h3>Gráfico de la evolución de los eventos a lo largo de la temporada</h3>
-            <img src="img/grafico4.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;" onclick="mostrarImagen(this)">
+            <img src="img/grafico4.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
+                onclick="mostrarImagen(this)">
             <button onclick="mostrarCodigo('codigo4')">Ver Código</button>
             <pre id="codigo4" style="display: none;">
                 df_combinado['fecha'] = pd.to_datetime(df_combinado['fecha'])
@@ -143,7 +149,8 @@
         </section>
         <section>
             <h3>Gráfico de la densidad de asistencia por tipo de acto</h3>
-            <img src="img/grafico5.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;" onclick="mostrarImagen(this)">
+            <img src="img/grafico5.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
+                onclick="mostrarImagen(this)">
             <button onclick="mostrarCodigo('codigo5')">Ver Código</button>
             <pre id="codigo5" style="display: none;">
                 plt.figure(figsize=(12, 6))
@@ -159,7 +166,8 @@
         </section>
         <section>
             <h3>Gráfico de la distribución de eventos por día y hora</h3>
-            <img src="img/grafico6.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;" onclick="mostrarImagen(this)">
+            <img src="img/grafico6.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
+                onclick="mostrarImagen(this)">
             <button onclick="mostrarCodigo('codigo6')">Ver Código</button>
             <pre id="codigo6" style="display: none;">
                 df_combinado['hora'] = pd.to_datetime(df_combinado['fecha']).dt.hour
@@ -178,7 +186,8 @@
         </section>
         <section>
             <h3>Gráfico de la asistencia promedio por tipo de acto</h3>
-            <img src="img/grafico7.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;" onclick="mostrarImagen(this)">
+            <img src="img/grafico7.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
+                onclick="mostrarImagen(this)">
             <button onclick="mostrarCodigo('codigo7')">Ver Código</button>
             <pre id="codigo7" style="display: none;">
                 # Calcular la asistencia promedio por tipo de acto
@@ -198,7 +207,8 @@
         </section>
         <section>
             <h3>Gráfico de la evolución de la asistencia a lo largo del tiempo</h3>
-            <img src="img/grafico8.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;" onclick="mostrarImagen(this)">
+            <img src="img/grafico8.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
+                onclick="mostrarImagen(this)">
             <button onclick="mostrarCodigo('codigo8')">Ver Código</button>
             <pre id="codigo8" style="display: none;">
                 # Convertir la fecha a formato datetime y agrupar por mes
@@ -226,7 +236,8 @@
         </section>
         <section>
             <h3>Gráfico de asistencia por día de la semana y hora</h3>
-            <img src="img/grafico9.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;" onclick="mostrarImagen(this)">
+            <img src="img/grafico9.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
+                onclick="mostrarImagen(this)">
             <button onclick="mostrarCodigo('codigo9')">Ver Código</button>
             <pre id="codigo9" style="display: none;">
                 # Extraer día de la semana y hora
@@ -251,7 +262,8 @@
         </section>
         <section>
             <h3>Gráfico de la asistencia promedio por formato</h3>
-            <img src="img/grafico10.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;" onclick="mostrarImagen(this)">
+            <img src="img/grafico10.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
+                onclick="mostrarImagen(this)">
             <button onclick="mostrarCodigo('codigo10')">Ver Código</button>
             <pre id="codigo10" style="display: none;">
                 # Calcular la asistencia promedio por formato
@@ -291,14 +303,84 @@
             <pre id="codigo-modal-content"></pre>
         </div>
     </div>
-    
+
     <div id="imagen-modal" class="modal">
         <span class="close" onclick="cerrarImagen()">&times;</span>
         <img class="modal-img" id="imagen-modal-content">
     </div>
 
+    <section id="visualizacion">
+        <h2>Análisis visual y deducciones del comportamiento del público</h2>
+
+        <p>
+            La visualización de los datos ha permitido identificar patrones claros en cuanto a la naturaleza y
+            distribución temporal de los eventos culturales
+            celebrados en la sede de Banca March durante la temporada 2023/2024.
+        </p>
+
+        <p>
+            En primer lugar, se observa que el tipo de evento predominante fue el <strong>concierto</strong>, con un
+            <strong>60,2%</strong> del total de actos,
+            frente al <strong>39,8%</strong> correspondiente a conferencias. Esta diferencia se refleja también en el
+            volumen total de asistentes y en la media
+            de asistencia validada, siendo los conciertos, en general, los eventos que generan una mayor atracción de
+            público.
+        </p>
+
+        <p>
+            Si analizamos la <strong>temática o formato específico</strong> de los actos, se aprecia una notable
+            concentración en pocos formatos recurrentes,
+            destacando los <em>Ciclos de conferencias</em> y los conciertos de <em>Jóvenes Intérpretes</em>, que juntos
+            representan una proporción significativa
+            de toda la oferta cultural. Estas temáticas reflejan un claro interés por el contenido especializado, tanto
+            divulgativo como musical.
+        </p>
+
+        <p>
+            A nivel temporal, la <strong>distribución mensual de eventos</strong> presenta picos de actividad en los
+            meses de <strong>octubre, noviembre,
+                enero y febrero</strong>, coincidiendo con periodos lectivos o de mayor actividad institucional. Se
+            detectan caídas marcadas en diciembre y junio,
+            lo que puede vincularse a vacaciones o festivos.
+        </p>
+
+        <p>
+            En cuanto a la <strong>distribución por días y franjas horarias</strong>, los datos muestran que los eventos
+            tienden a concentrarse en horarios
+            de tarde, especialmente entre las <strong>16:00 y 18:00 horas</strong>. Los <strong>miércoles, jueves y
+                sábados</strong> aparecen como los días
+            de mayor actividad cultural, tanto en cantidad de eventos como en volumen de asistencia.
+        </p>
+
+        <p>
+            En cuanto a la <strong>asistencia promedio</strong> según la tipología, los conciertos siguen liderando con
+            una media superior a los 270 asistentes,
+            seguidos por conferencias con algo más de 230. Esta diferencia refuerza la idea de una preferencia del
+            público por eventos musicales, aunque las conferencias
+            también mantienen una participación sólida y constante.
+        </p>
+
+        <p>
+            Por último, si se analiza la <strong>asistencia por formato específico</strong>, se confirma que aquellos
+            más institucionalizados o repetitivos
+            (como conciertos didácticos, ciclos temáticos o cine en la March) alcanzan cifras de validación superiores a
+            los 250 participantes de media, lo que
+            sugiere una fidelización del público hacia determinadas líneas de programación.
+        </p>
+
+        <p>
+            En conjunto, los datos evidencian una programación cultural equilibrada, pero con claras preferencias hacia
+            ciertos días, horas y formatos.
+            Esta información podría ser utilizada para optimizar futuras planificaciones, reforzando aquellas líneas que
+            demuestran mayor impacto y acogida
+            entre el público asistente.
+        </p>
+    </section>
+
+
     <footer>
         <p>&copy; 2024 Proyecto de Análisis de Datos. Todos los derechos reservados.</p>
     </footer>
 </body>
+
 </html>

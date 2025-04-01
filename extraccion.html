@@ -35,45 +35,44 @@
         <section id="configuracion-entorno">
             <h2>Paso 1: Configuración del entorno</h2>
             <p>
-                Para trabajar con MongoDB en Python es necesario instalar y configurar la biblioteca
-                <code>pymongo</code>.
+                Para poder acceder a los datos almacenados en MongoDB desde Python, es necesario preparar el entorno de
+                trabajo.
+                Esto implica la instalación de la biblioteca <code>pymongo</code>, que permite establecer conexiones con
+                bases de datos MongoDB,
+                realizar consultas y gestionar la información desde scripts de Python.
             </p>
-            <pre><code>!pip install pymongo
-import pymongo
-print(pymongo.__version__)</code></pre>
         </section>
 
         <section id="conexion-base-datos">
             <h2>Paso 2: Conexión a la base de datos</h2>
             <p>
-                Se utiliza la URI del servidor y las credenciales de acceso para conectarse a la base de datos de
-                MongoDB.
+                La conexión con la base de datos se realiza utilizando una URI que incluye las credenciales de acceso
+                (usuario y contraseña),
+                el host del servidor y el puerto correspondiente. Esta configuración permite acceder de forma segura a
+                las colecciones de datos almacenadas.
             </p>
-            <pre><code>username = "pedro"
-password = "********"
-mongo_uri = f"mongodb://{username}:{password}@srvmongo.fmarch.es:27017"
-myclient = pymongo.MongoClient(mongo_uri)</code></pre>
         </section>
 
         <section id="seleccion-bases">
             <h2>Paso 3: Selección de las bases de datos</h2>
-            <p>Se seleccionan las bases de datos sobre las que se va a trabajar:</p>
-            <pre><code>mydb1 = myclient["culturales"]
-mydb2 = myclient["reservas"]</code></pre>
+            <p>
+                Una vez establecida la conexión, se seleccionaron las bases de datos relevantes para el análisis.
+                En este caso, se trabajó con dos: una que almacena los actos culturales y otra que contiene información
+                sobre las reservas y validaciones de entradas.
+            </p>
         </section>
 
         <section id="seleccion-colecciones">
             <h2>Paso 4: Selección de las colecciones</h2>
             <p>
-                Cada base de datos contiene una o varias colecciones. Aquí se seleccionan las colecciones específicas:
-            </p>
-            <pre><code>mycol1 = mydb1["actos"]
-mycol2 = mydb2["resumenv2"]</code></pre>
-            <p>
-                De esta forma, ya se tiene acceso a los datos sobre los que se desea trabajar.
+                Dentro de cada base de datos existen colecciones específicas. Se seleccionaron las colecciones
+                <code>actos</code> y <code>resumenv2</code>,
+                que contienen respectivamente información sobre los eventos realizados y sobre las entradas validadas
+                para dichos eventos.
             </p>
         </section>
     </section>
+
 
     <footer>
         <p>&copy; 2024 Proyecto de Análisis de Datos. Todos los derechos reservados.</p>

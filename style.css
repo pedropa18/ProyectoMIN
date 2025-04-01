@@ -91,6 +91,8 @@ pre {
     overflow-x: auto;
     border-radius: 5px;
     font-size: 0.95em;
+    max-height: 400px;
+    white-space: pre-wrap;
 }
 
 code {
@@ -99,7 +101,7 @@ code {
     color: #1f3c58;
 }
 
-/* Estilos para código en línea */
+/* Código en línea */
 p code {
     background-color: #eaeaea;
     padding: 3px 5px;
@@ -134,34 +136,9 @@ footer {
     margin-top: 20px;
 }
 
-/* Responsividad */
-@media (max-width: 768px) {
-    nav ul li {
-        display: block;
-        margin: 10px 0;
-    }
-
-    section {
-        width: 90%;
-        padding: 20px;
-    }
-
-    header h1 {
-        font-size: 1.8em;
-    }
-
-    h2 {
-        font-size: 1.4em;
-    }
-
-    p {
-        font-size: 1em;
-    }
-}
-
-/*Estilos para el modal*/
+/* Estilos para modal */
 .modal {
-    display: none; /* Oculto por defecto */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -177,7 +154,7 @@ footer {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    width: 60%;
+    width: 90%;
     max-width: 800px;
     text-align: left;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -193,12 +170,70 @@ footer {
     cursor: pointer;
 }
 
-pre {
-    background-color: #f4f4f4;
-    padding: 15px;
-    border-radius: 5px;
-    overflow-x: auto;
-    max-height: 400px;
-    white-space: pre-wrap;
+/* Imágenes responsivas */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 15px auto;
 }
 
+/* RESPONSIVIDAD */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    nav ul li a {
+        font-size: 1em;
+        padding: 10px;
+        display: block;
+    }
+
+    section {
+        width: 90%;
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    header h1 {
+        font-size: 1.6em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.4em;
+    }
+
+    nav ul li a {
+        font-size: 0.95em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    p {
+        font-size: 0.95em;
+    }
+
+    button {
+        width: 100%;
+        font-size: 1em;
+    }
+}
