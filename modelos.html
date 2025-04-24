@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modelos de Predicción</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <h1>Modelos de Predicción</h1>
@@ -20,17 +22,177 @@
         </nav>
     </header>
 
-    <section id="modelos">
-        <h2>Modelos de Predicción</h2>
-        <p>
-            En esta sección se describen los modelos de predicción utilizados para analizar tendencias 
-            futuras en la asistencia a los eventos. Se aplican algoritmos de machine learning para 
-            hacer estimaciones basadas en datos históricos.
-        </p>
-    </section>
+    <main>
+        <section id="modelos">
+            <h2>Modelos de Predicción</h2>
+            <p>
+                En esta sección se describen los modelos de predicción utilizados para analizar tendencias
+                futuras en la asistencia a los eventos. Se aplican algoritmos de machine learning para
+                hacer estimaciones basadas en datos históricos.
+            </p>
+
+            <h3>Clustering de Asistencia a los Actos</h3>
+            <p>
+                Se realizó un análisis de <strong>clustering</strong> sobre los actos celebrados durante la temporada
+                2023-2024 con el fin de identificar patrones de comportamiento en términos de <em>asistencia
+                    presencial</em>.
+                El método elegido fue <strong>k-Means</strong>, una técnica no supervisada que agrupa elementos según su
+                similitud.
+            </p>
+
+            <p>
+                Como paso previo, se normalizaron las variables <strong>Total de visitantes</strong> y <strong>Total de
+                    entradas validadas</strong>, las cuales sirvieron como base para la agrupación.
+                Para determinar el número óptimo de clústeres, se utilizó el <strong>método del codo</strong>, que
+                analiza la inercia del modelo en función del número de grupos.
+            </p>
+
+            <figure>
+                <img src="img/elbow_kmeans.png" alt="Método del Codo para KMeans">
+                <figcaption>Método del Codo: valor óptimo de <em>k = 4</em>.</figcaption>
+            </figure>
+
+            <p>
+                A continuación, se aplicó el algoritmo con <strong>k = 4</strong>, lo cual permitió identificar grupos
+                bien diferenciados de actos, desde los de baja asistencia hasta los más exitosos.
+                Se analizaron también las características del tipo de evento predominante en cada grupo.
+            </p>
+
+            <figure>
+                <img src="img/clusters_kmeans.png" alt="Clusters KMeans sobre actos culturales">
+                <figcaption>Visualización de los clústeres generados según asistencia y validaciones.</figcaption>
+            </figure>
+
+            <h4>Resumen por Clúster</h4>
+            <ul>
+                <li><strong>Clúster 0:</strong> Asistencia moderada (~174 visitantes). Mayoría: conferencias.</li>
+                <li><strong>Clúster 1:</strong> Alta asistencia (~279 visitantes). Actos más frecuentes y exitosos,
+                    equilibrados entre conciertos y conferencias.</li>
+                <li><strong>Clúster 2:</strong> Eventos sobresalientes (~364 visitantes), principalmente conciertos
+                    destacados.</li>
+                <li><strong>Clúster 3:</strong> Baja asistencia (~22 visitantes), compuesto solo por conferencias.</li>
+            </ul>
+
+            <p>
+                Esta segmentación permite comprender mejor el impacto de los actos programados, orientar la estrategia
+                de difusión y optimizar la planificación de futuras temporadas en función de los perfiles de asistencia.
+            </p>
+
+            <h3>Predicción de Asistencia mediante Series Temporales</h3>
+            <p>
+                Para analizar la evolución de la asistencia a lo largo del tiempo, se aplicaron dos enfoques
+                complementarios de series temporales:
+            </p>
+            <ul>
+                <li><strong>ARIMA</strong>: centrado en la temporada más reciente (2023–2024), permite prever el corto
+                    plazo.</li>
+                <li><strong>Prophet</strong>: basado en datos históricos desde 2015, permite identificar tendencias y
+                    estacionalidades a largo plazo.</li>
+            </ul>
+
+            <h4>1. Modelo ARIMA (Serie reciente)</h4>
+            <p>
+                Se construyó una serie mensual a partir de los eventos registrados desde septiembre de 2023 hasta julio
+                de 2024.
+                Sobre esta serie, se aplicó un modelo <strong>ARIMA(1,1,1)</strong> para analizar la <em>tendencia
+                    reciente</em> y generar un <strong>pronóstico de los próximos seis meses</strong>.
+            </p>
+
+            <figure>
+                <img src="img/arima_serie_historica.png" alt="Serie temporal de asistencia mensual">
+                <figcaption>Asistencia mensual a los actos (septiembre 2023 – julio 2024).</figcaption>
+            </figure>
+
+            <figure>
+                <img src="img/arima_forecast.png" alt="Predicción ARIMA con intervalo de confianza">
+                <figcaption>Pronóstico de asistencia con ARIMA: próximos 6 meses.</figcaption>
+            </figure>
+
+            <p>
+                Este modelo es útil para detectar picos o descensos próximos, aunque su precisión mejora con más datos
+                históricos.
+                Se recomienda continuar su uso con la incorporación de futuras temporadas.
+            </p>
+
+            <h4>2. Modelo Prophet (Serie histórica desde 2015)</h4>
+            <p>
+                Para un análisis más profundo, se entrenó un modelo <strong>Prophet</strong> con datos desde el año 2015
+                hasta la actualidad.
+                Este modelo es especialmente eficaz en la detección de <strong>estacionalidades anuales</strong> y
+                <strong>cambios de tendencia estructurales</strong>.
+            </p>
+
+            <figure>
+                <img src="img/prophet.png" alt="Predicción Prophet a largo plazo">
+                <figcaption>
+                    Predicción de asistencia mensual (2015–2025).<br>
+                    <strong>Línea azul:</strong> valores predichos · <strong>Puntos negros:</strong> datos reales ·
+                    <strong>Zonas azul claro:</strong> intervalo de confianza
+                </figcaption>
+            </figure>
+
+            <p>
+                El modelo identificó los <strong>meses con mayor afluencia esperada en 2025</strong>, lo cual es
+                especialmente útil para la planificación anticipada de eventos:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mayo 2025</th>
+                        <th>Octubre 2025</th>
+                        <th>Noviembre 2025</th>
+                        <th>Enero 2025</th>
+                        <th>Febrero 2025</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>7697</td>
+                        <td>9444</td>
+                        <td>9779</td>
+                        <td>7738</td>
+                        <td>8710</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Este análisis combinado permite abordar tanto las decisiones tácticas de corto plazo como las
+                estratégicas de programación a medio y largo plazo.
+            </p>
+            <h3>Regresión Lineal: Predicción de Asistencia</h3>
+            <p>
+                Se aplicó un modelo de <strong>regresión lineal</strong> para estudiar la relación entre el número de
+                <em>visitantes totales</em> y el número de <em>entradas validadas</em> por acto.
+                Esta técnica permite estimar el impacto de una variable predictora sobre una variable objetivo continua.
+            </p>
+
+            <p>
+                Los resultados indican una correlación lineal positiva significativa entre ambas variables. El modelo
+                logró un <strong>R² de 0.74</strong>, lo que significa que el 74% de la variabilidad en la asistencia
+                puede explicarse a partir de la cantidad total de visitantes previstos.
+            </p>
+
+            <figure>
+                <img src="img/regresion_lineal.png" alt="Regresión lineal: Visitantes vs Validadas">
+                <figcaption>
+                    Relación entre visitantes totales y entradas validadas. La línea roja representa el ajuste lineal
+                    del modelo.
+                </figcaption>
+            </figure>
+
+            <p>
+                Este análisis permite prever la asistencia esperada a un evento en función del número estimado de
+                visitantes, lo que puede apoyar decisiones operativas como la logística de aforo o personal de sala.
+            </p>
+
+        </section>
+    </main>
 
     <footer>
         <p>&copy; 2024 Proyecto de Análisis de Datos. Todos los derechos reservados.</p>
     </footer>
 </body>
+
 </html>
