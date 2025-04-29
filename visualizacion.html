@@ -7,16 +7,6 @@
     <title>Visualización de Datos</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script>
-        function mostrarCodigo(id) {
-            let codigo = document.getElementById(id).innerHTML;
-            document.getElementById("codigo-modal-content").innerHTML = codigo;
-            document.getElementById("codigo-modal").style.display = "flex";
-        }
-
-        function cerrarCodigo() {
-            document.getElementById("codigo-modal").style.display = "none";
-        }
-
         function mostrarImagen(imgElement) {
             let modal = document.getElementById("imagen-modal");
             let modalImg = document.getElementById("imagen-modal-content");
@@ -34,6 +24,7 @@
 <body>
     <header>
         <h1>Visualización de Datos</h1>
+        <span class="menu-toggle" id="menu-toggle">&#9776;</span>
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
@@ -58,7 +49,6 @@
             <h3>Gráfico de Distribución</h3>
             <img src="img/grafico1.png" alt="Gráfico de distribución" style="width: 100%; max-width: 600px;"
                 onclick="mostrarImagen(this)">
-            <button onclick="mostrarCodigo('codigo1')">Ver Código</button>
             <pre id="codigo1" style="display: none;">
                 # Contar la cantidad de cada tipo de acto
                 tipo_acto_counts = df_combinado['tipo'].value_counts()
@@ -81,7 +71,6 @@
             <h3>Gráfico de Actos por tipo</h3>
             <img src="img/grafico2.png" alt="Gráfico de barras" style="width: 100%; max-width: 600px;"
                 onclick="mostrarImagen(this)">
-            <button onclick="mostrarCodigo('codigo2')">Ver Código</button>
             <pre id="codigo2" style="display: none;">
                 # Contar la cantidad de cada formato
                 formato_counts = df_combinado['formato'].value_counts()
@@ -117,7 +106,6 @@
             <h3>Gráfico de actos por formato</h3>
             <img src="img/grafico3.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
                 onclick="mostrarImagen(this)">
-            <button onclick="mostrarCodigo('codigo3')">Ver Código</button>
             <pre id="codigo3" style="display: none;">
                 tipo_acto_counts = df_combinado['tipo'].value_counts()
                 plt.figure(figsize=(12, 6))
@@ -133,7 +121,6 @@
             <h3>Gráfico de la evolución de los eventos a lo largo de la temporada</h3>
             <img src="img/grafico4.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
                 onclick="mostrarImagen(this)">
-            <button onclick="mostrarCodigo('codigo4')">Ver Código</button>
             <pre id="codigo4" style="display: none;">
                 df_combinado['fecha'] = pd.to_datetime(df_combinado['fecha'])
                 df_combinado['mes'] = df_combinado['fecha'].dt.to_period('M')
@@ -151,7 +138,6 @@
             <h3>Gráfico de la densidad de asistencia por tipo de acto</h3>
             <img src="img/grafico5.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
                 onclick="mostrarImagen(this)">
-            <button onclick="mostrarCodigo('codigo5')">Ver Código</button>
             <pre id="codigo5" style="display: none;">
                 plt.figure(figsize=(12, 6))
                 sns.violinplot(x=df_combinado['tipo'], y=df_combinado['Total_Validadas'], inner="quartile")
@@ -168,7 +154,6 @@
             <h3>Gráfico de la distribución de eventos por día y hora</h3>
             <img src="img/grafico6.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
                 onclick="mostrarImagen(this)">
-            <button onclick="mostrarCodigo('codigo6')">Ver Código</button>
             <pre id="codigo6" style="display: none;">
                 df_combinado['hora'] = pd.to_datetime(df_combinado['fecha']).dt.hour
                 df_combinado['dia_semana'] = pd.to_datetime(df_combinado['fecha']).dt.day_name()
@@ -188,7 +173,6 @@
             <h3>Gráfico de la asistencia promedio por tipo de acto</h3>
             <img src="img/grafico7.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
                 onclick="mostrarImagen(this)">
-            <button onclick="mostrarCodigo('codigo7')">Ver Código</button>
             <pre id="codigo7" style="display: none;">
                 # Calcular la asistencia promedio por tipo de acto
                 asistencia_promedio = df_combinado.groupby("tipo")["Total_Validadas"].mean().sort_values()
@@ -209,7 +193,6 @@
             <h3>Gráfico de la evolución de la asistencia a lo largo del tiempo</h3>
             <img src="img/grafico8.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
                 onclick="mostrarImagen(this)">
-            <button onclick="mostrarCodigo('codigo8')">Ver Código</button>
             <pre id="codigo8" style="display: none;">
                 # Convertir la fecha a formato datetime y agrupar por mes
                 df_combinado['fecha'] = pd.to_datetime(df_combinado['fecha'])
@@ -238,7 +221,6 @@
             <h3>Gráfico de asistencia por día de la semana y hora</h3>
             <img src="img/grafico9.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
                 onclick="mostrarImagen(this)">
-            <button onclick="mostrarCodigo('codigo9')">Ver Código</button>
             <pre id="codigo9" style="display: none;">
                 # Extraer día de la semana y hora
                 df_combinado["hora"] = pd.to_datetime(df_combinado["fecha"]).dt.hour
@@ -264,7 +246,6 @@
             <h3>Gráfico de la asistencia promedio por formato</h3>
             <img src="img/grafico10.png" alt="Gráfico de líneas" style="width: 100%; max-width: 600px;"
                 onclick="mostrarImagen(this)">
-            <button onclick="mostrarCodigo('codigo10')">Ver Código</button>
             <pre id="codigo10" style="display: none;">
                 # Calcular la asistencia promedio por formato
                 asistencia_por_formato = 
@@ -294,20 +275,13 @@
                 plt.show()
             </pre>
         </section>
-    </section>
 
-    <div id="codigo-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="cerrarCodigo()">&times;</span>
-            <h3>Código Fuente</h3>
-            <pre id="codigo-modal-content"></pre>
+        <div id="imagen-modal" class="modal">
+            <span class="close" onclick="cerrarImagen()">&times;</span>
+            <img class="modal-img" id="imagen-modal-content">
         </div>
-    </div>
 
-    <div id="imagen-modal" class="modal">
-        <span class="close" onclick="cerrarImagen()">&times;</span>
-        <img class="modal-img" id="imagen-modal-content">
-    </div>
+    </section>
 
     <section id="visualizacion">
         <h2>Análisis visual y deducciones del comportamiento del público</h2>
@@ -381,6 +355,15 @@
     <footer>
         <p>&copy; 2024 Proyecto de Análisis de Datos. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
 </body>
 
 </html>

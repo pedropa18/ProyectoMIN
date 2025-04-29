@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minería de datos y el paradigma del bigdata</title>
+    <title>Proyecto de Análisis Cultural 2023/2024</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
     <header>
-        <h1>MINERÍA DE DATOS Y EL PARADIGMA DEL BIG DATA</h1>
+        <h1>Minería de Datos y Análisis Cultural</h1>
+        <span class="menu-toggle" id="menu-toggle">&#9776;</span>
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
@@ -20,30 +23,109 @@
         </nav>
     </header>
 
-    <section id="introduccion">
-        <h2>Introducción</h2>
+    <section id="bienvenida">
+        <h2>Bienvenido al Proyecto de Análisis de Eventos Culturales</h2>
         <p>
-            Este proyecto tiene como objetivo analizar los datos de una organización, estudiando los eventos de la temporada 23/24.
-            Se examinarán patrones de asistencia, formatos de eventos y su impacto en la audiencia. La información se procesará en varias etapas: 
-            extracción, limpieza, visualización y aplicación de modelos predictivos.
+            Este proyecto tiene como objetivo estudiar y analizar los datos de asistencia a eventos organizados por la
+            Fundación Juan March
+            durante la temporada cultural 2023/2024 en Madrid.
+            A través de una metodología rigurosa basada en la minería de datos y en técnicas estadísticas, se han
+            extraído patrones de asistencia,
+            se han limpiado y depurado los datos, y se han construido modelos predictivos para anticipar tendencias
+            futuras.
         </p>
-        <p>
-            Los datos a analizar corresponden a una serie de eventos realizados a lo largo de la temporada. En ellos se registra el número total 
-            de asistentes a cada evento, junto con información sobre el tipo y formato del acto, la fecha en que se llevó a cabo, su nombre y 
-            un identificador único denominado <strong>"idacto"</strong>, entre otros detalles.
-        </p>
-    
-        <h2>Recursos y herramientas empleados</h2>
+    </section>
+
+    <section id="estructura">
+        <h2>Fases del Proyecto</h2>
         <ul>
-            <li><strong>MongoDB:</strong> Sistema gestor de bases de datos alojado en el servidor de la organización, utilizado para la extracción de datos.</li>
-            <li><strong>Jupyter Notebook:</strong> Entorno empleado para la implementación del proyecto en todas sus fases.</li>
-            <li><strong>Python:</strong> Lenguaje de programación utilizado para el desarrollo del proyecto.</li>
-            <li><strong>Pandas:</strong> Biblioteca de Python utilizada para la manipulación y análisis de datos.</li>
+            <li><strong>Extracción de datos:</strong> conexión segura con bases de datos MongoDB y selección de datos
+                relevantes.</li>
+            <li><strong>Limpieza de datos:</strong> filtrado de eventos cancelados, depuración de entradas
+                inconsistentes y preparación para análisis.</li>
+            <li><strong>Visualización de datos:</strong> representación gráfica para identificar patrones y
+                comportamientos clave.</li>
+            <li><strong>Modelos de predicción:</strong> clustering de actos y series temporales para anticipar la
+                evolución de la asistencia.</li>
         </ul>
     </section>
-    
+
+    <section id="datos-generales">
+        <h2>Resumen Técnico</h2>
+        <p>
+            Se trabajó principalmente con las bases de datos <strong>culturales</strong> (127,77 MB) y
+            <strong>reservas</strong> (57,00 MB),
+            extraídas de un ecosistema global que ocupa <strong>23,82 GB</strong> de información estructurada.
+            La colección de actos culturales contiene <strong>289 eventos</strong> mientras que las validaciones de
+            asistencia registran
+            <strong>282 entradas</strong>, combinadas exitosamente en <strong>246 registros íntegros</strong> para el
+            análisis.
+        </p>
+    </section>
+
+    <section id="herramientas">
+        <h2>Herramientas Utilizadas</h2>
+        <p>
+            El desarrollo completo del proyecto de análisis de datos culturales se ha apoyado en una serie de
+            herramientas y tecnologías
+            seleccionadas por su robustez y adecuación a las necesidades del tratamiento de datos masivos y su análisis
+            posterior.
+        </p>
+        <ul>
+            <li><strong>Python:</strong> lenguaje de programación principal utilizado para el tratamiento de datos y
+                modelado.</li>
+            <li><strong>Jupyter Notebook:</strong> entorno de desarrollo interactivo donde se estructuraron todas las
+                fases del proyecto.</li>
+            <li><strong>Pandas:</strong> biblioteca esencial para la manipulación, limpieza y transformación de datos.
+            </li>
+            <li><strong>Pymongo:</strong> conector para acceder y extraer información desde bases de datos MongoDB.</li>
+            <li><strong>Matplotlib y Seaborn:</strong> librerías de visualización gráfica empleadas para representar los
+                resultados de manera visual.</li>
+            <li><strong>Scikit-learn:</strong> librería de machine learning utilizada para el modelado de clusters
+                mediante k-Means.</li>
+            <li><strong>Statsmodels:</strong> utilizada para la construcción de modelos ARIMA en el análisis de series
+                temporales.</li>
+            <li><strong>Facebook Prophet:</strong> modelo predictivo empleado para analizar tendencias estacionales a
+                largo plazo.</li>
+        </ul>
+
+        <p>
+            Cada herramienta ha sido aplicada cuidadosamente en su fase correspondiente, garantizando un flujo de
+            trabajo sólido y coherente
+            que respeta las buenas prácticas tradicionales en proyectos de análisis de datos.
+        </p>
+    </section>
+
+
+    <section id="navegacion">
+        <h2>Explora el Análisis</h2>
+        <p>
+            A continuación, puedes acceder a cada una de las fases del proyecto para profundizar en los métodos y
+            resultados obtenidos:
+        </p>
+        <ul>
+            <li><a href="extraccion.html"><strong>Extracción de Datos</strong></a>: ¿Cómo se obtuvieron los datos?</li>
+            <li><a href="limpieza.html"><strong>Limpieza de Datos</strong></a>: ¿Qué datos fueron depurados y por qué?
+            </li>
+            <li><a href="visualizacion.html"><strong>Visualización de Datos</strong></a>: ¿Qué patrones visuales
+                emergieron?</li>
+            <li><a href="modelos.html"><strong>Modelos de Predicción</strong></a>: ¿Cómo se anticipa la asistencia
+                futura?</li>
+        </ul>
+    </section>
+
     <footer>
-        <p>&copy; 2024 Proyecto de Análisis de Datos. Todos los derechos reservados.</p>
+        <p>&copy; 2024 Proyecto de Análisis de Datos Culturales. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
 </body>
+
 </html>

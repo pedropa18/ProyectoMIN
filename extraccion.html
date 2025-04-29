@@ -11,6 +11,7 @@
 <body>
     <header>
         <h1>Extracción de Datos</h1>
+        <span class="menu-toggle" id="menu-toggle">&#9776;</span>
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
@@ -77,6 +78,15 @@
     <footer>
         <p>&copy; 2024 Proyecto de Análisis de Datos. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
 </body>
 
 </html>

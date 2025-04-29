@@ -11,6 +11,7 @@
 <body>
     <header>
         <h1>Limpieza de Datos</h1>
+        <span class="menu-toggle" id="menu-toggle">&#9776;</span>
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
@@ -66,76 +67,116 @@
         </section>
     </section>
 
+
     <section id="analisis-datos">
         <h2>Análisis técnico y calidad del conjunto de datos</h2>
 
         <p>
-            Para este proyecto se ha trabajado con una base de datos de eventos culturales organizados por la sede de 
-            Madrid de la Fundación Juan March.
-            La información se encuentra distribuida en dos colecciones: <strong>actos</strong> (que almacena datos de
-            los eventos organizados)
-            y <strong>resumenv2</strong> (que recoge validaciones de asistencia por parte del público).
+            Para este proyecto se ha trabajado con una base de datos de eventos culturales organizados por la sede de
+            Madrid de la Fundación Juan March. La información utilizada se encuentra distribuida en dos colecciones:
+            <strong>actos</strong> (eventos organizados) y <strong>resumenv2</strong> (validaciones de asistencia del
+            público),
+            contenidas en las bases de datos <em>culturales</em> y <em>reservas</em> respectivamente.
         </p>
 
         <p>
-            En su conjunto, estas bases de datos contienen un total de <strong>9.912 registros de eventos</strong> y
-            <strong>2.660 registros de validaciones</strong>,
-            acumulados a lo largo de varias temporadas. El tamaño total almacenado asciende a <strong>229,26 MB</strong>
-            para la base <em>culturales</em>
-            y <strong>312,30 MB</strong> para <em>reservas</em>.
+            Las colecciones de datos referidas contienen un total de <strong>9.943 registros de eventos</strong> y
+            <strong>2.678 registros de validaciones</strong>. El tamaño en disco asciende a
+            <strong>127,77 MB</strong> para <em>culturales</em> y <strong>57,00 MB</strong> para <em>reservas</em>,
+            con un total combinado de <strong>184,77 MB</strong> empleados directamente para este análisis.
         </p>
 
         <p>
-            Tras aplicar un filtrado para analizar únicamente los actos celebrados en la sede de <strong>Madrid</strong>
-            durante la temporada
-            <strong>2023/2024</strong> (entre septiembre y julio), se extrajo un subconjunto compuesto por <strong>289
-                eventos</strong> y
-            <strong>282 registros de validación</strong>, de los cuales <strong>246 pudieron ser combinados</strong> de
-            forma íntegra a través del identificador común <code>idacto</code>.
+            No obstante, el sistema en el que se integran estas bases incluye una arquitectura de datos más amplia.
+            El tamaño total (sin considerar bases internas) asciende a <strong>23,82 GB</strong>, distribuidos entre
+            más de treinta bases individuales, entre ellas destacan por volumen:
         </p>
 
-        <p>
-            La limpieza posterior eliminó registros inconsistentes, como eventos cancelados, entradas sin validación o
-            nombres no informados.
-            Cabe destacar que <strong>solo se detectó 1 evento cancelado</strong> y <strong>ningún campo nulo</strong>
-            en las variables clave,
-            lo que evidencia que se ha trabajado sobre una base de datos ya depurada y curada para análisis.
-            Esta alta calidad de los datos ha permitido realizar el análisis de forma directa, sin necesidad de imputar
-            valores ni recurrir a métodos de inferencia.
-        </p>
-
-        <p>
-            En cuanto a los atributos disponibles, el conjunto combinado incluye campos como:
         <ul>
-            <li><code>idacto</code>: identificador único del evento (entero)</li>
-            <li><code>nombre</code>: nombre del acto (texto)</li>
-            <li><code>tipo</code>: categoría del evento (concierto, conferencia...)</li>
-            <li><code>formato</code>: clasificación adicional del evento (string)</li>
-            <li><code>fecha</code>: fecha y hora del acto (datetime)</li>
+            <li><strong>newsletters</strong>: 11.827,59 MB</li>
+            <li><strong>YouTube</strong>: 9.438,55 MB</li>
+            <li><strong>PreservacionMonitor</strong>: 633,79 MB</li>
+            <li><strong>twitter</strong>: 593,79 MB</li>
+            <li><strong>vimeo</strong>: 436,24 MB</li>
+            <li><strong>db_linz</strong>: 307,73 MB</li>
+            <li><strong>GoogleAnalytics</strong>: 209,27 MB</li>
+            <li><strong>LuisPhD</strong>: 225,67 MB</li>
+            <li><strong>DatalabMonitor</strong>: 159,07 MB</li>
+        </ul>
+
+        <p>
+            Este contexto permite situar el trabajo realizado dentro de un ecosistema de datos más amplio, pero
+            delimitado
+            en este caso a un subconjunto muy concreto y manejable.
+        </p>
+
+        <p>
+            Tras aplicar un filtrado para considerar únicamente los actos celebrados en la sede de
+            <strong>Madrid</strong>
+            durante la temporada <strong>2023/2024</strong> (de septiembre a julio), se extrajo un subconjunto de
+            <strong>289 eventos</strong> y <strong>282 registros de validación</strong>, de los cuales
+            <strong>246 pudieron ser combinados</strong> utilizando el identificador común <code>idacto</code>.
+        </p>
+
+        <p>
+            La limpieza posterior identificó <strong>1 evento cancelado</strong> antes de depurar los datos.
+            No se registraron campos nulos en las variables esenciales, lo que confirma la elevada calidad del conjunto.
+            El análisis pudo realizarse de manera directa, sin necesidad de imputaciones ni correcciones inferidas.
+        </p>
+
+        <p>
+            El conjunto combinado final ocupa aproximadamente <strong>0,10 MB</strong> y contiene los siguientes
+            atributos:
+        <ul>
+            <li><code>idacto</code>: identificador único del evento (int64)</li>
             <li><code>VisitantesTotales</code>: aforo estimado (objeto convertible a numérico)</li>
-            <li><code>Total_Validadas</code>: número real de asistentes validados (número decimal)</li>
+            <li><code>cancelado</code>: estado de cancelación del evento (int64)</li>
+            <li><code>nombre_x</code>: nombre del acto (object)</li>
+            <li><code>tipo</code>: categoría del evento (object)</li>
+            <li><code>fecha</code>: fecha y hora del acto (datetime64[ns])</li>
+            <li><code>nombre_y</code>: nombre de la validación (object)</li>
+            <li><code>formato</code>: clasificación del evento (object)</li>
+            <li><code>Total_Validadas</code>: número real de asistentes validados (float64)</li>
         </ul>
         </p>
 
         <p>
-            A nivel estadístico, la variable <code>Total_Validadas</code> muestra una <strong>media de 256,8 asistentes
-                por acto</strong>,
-            con un rango entre 4 y 297 personas, y una desviación estándar de aproximadamente 54.
-            Por otro lado, el valor más frecuente del aforo fue <strong>282 visitantes</strong>, que se repitió en 12
-            ocasiones.
+            <strong>Estadísticas de asistencia validada (<code>Total_Validadas</code>):</strong><br>
+            Media: 256,8 asistentes<br>
+            Desviación estándar: 54,56<br>
+            Rango: de 4 a 297 asistentes<br>
+            Percentiles (25%-50%-75%): 261 - 277 - 282 visitantes.
         </p>
 
         <p>
-            En resumen, el conjunto de datos analizado es representativo de la actividad cultural en la sede durante la
-            temporada estudiada,
-            y su calidad estructural permite extraer conclusiones fiables tanto a nivel descriptivo como visual.
+            <strong>Estadísticas de aforo estimado (<code>VisitantesTotales</code>):</strong><br>
+            Registros: 246<br>
+            Valores únicos: 128<br>
+            Valor más frecuente: 282 asistentes (repetido 12 veces).
+        </p>
+
+        <p>
+            En resumen, el conjunto de datos analizado es representativo de la actividad cultural de la sede en la
+            temporada
+            2023/2024 y posee una calidad técnica superior que facilita análisis estadísticos sólidos y fiables.
         </p>
     </section>
+
+
 
 
     <footer>
         <p>&copy; 2024 Proyecto de Análisis de Datos. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
 </body>
 
 </html>
